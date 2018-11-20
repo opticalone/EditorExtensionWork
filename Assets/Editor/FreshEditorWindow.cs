@@ -11,13 +11,10 @@ using UnityEngine.SceneManagement;
 public class FreshEditorWindow : EditorWindow
 {
     private string objQuery = "";
-
     private string objName = "";
     private string objType = "";
     private string objMember = "";
-
     private static Regex searchString = new Regex(@"(?<gameObjectName>.+)\.(?<componentName>.+)\.(?<memberName>.+)");
-
     [MenuItem("Tools/Search Tool %`")]
     public static void Create()
     {
@@ -28,7 +25,6 @@ public class FreshEditorWindow : EditorWindow
     // On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI  On GUI
     private void OnGUI()
     {
-
         objQuery = EditorGUILayout.TextField(objQuery);
         var matched = searchString.Match(objQuery);
         var objName = matched.Groups["gameObjectName"].Value;
@@ -61,8 +57,7 @@ public class FreshEditorWindow : EditorWindow
                 else
                 {
                     EditorGUILayout.LabelField(String.Format("the component \"{0}\"  can't be located", objMember));
-                }
-                
+                }             
             }
         }
         else
@@ -108,7 +103,6 @@ public class FreshEditorWindow : EditorWindow
                 break;
         }
     }
-
     private T GetValueOfMember<T>(MemberInfo info, object source)
     {
         switch (info.MemberType)
@@ -122,7 +116,6 @@ public class FreshEditorWindow : EditorWindow
                 return default(T);
         }
     }
-
     private MemberInfo GetMemberFromName(Component comps, string objmem)
     {
         MemberInfo info = comps.GetType().GetField(objmem);
